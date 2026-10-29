@@ -27,6 +27,9 @@ jobs:
       - name: Extract source ZIP
         run: unzip -o SoTinhLua-Android-CloudBuild.zip -d .
       - name: Fix blank screen
+      
+        run: sed -i 's/ crossorigin//g' android_apk_project/app/src/main/assets/www/index.html
+
         run: sed -i 's|<script crossorigin src="app.js"></script>|<script defer crossorigin src="app.js"></script>|' android_apk_project/app/src/main/assets/www/index.html
       - name: Build APK
         run: gradle -p android_apk_project assembleDebug
